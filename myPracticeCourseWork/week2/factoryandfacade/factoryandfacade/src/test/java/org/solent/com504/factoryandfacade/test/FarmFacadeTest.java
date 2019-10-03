@@ -28,11 +28,15 @@ public class FarmFacadeTest {
         farmFacade.addDog("Josh");
         farmFacade.addCat("Matthew");
         farmFacade.addCow("Eric");
+        farmFacade.addDuck("Daisy");
         List<Animal> testList; 
         testList = farmFacade.getAllAnimals();
         
         assertEquals("Josh",testList.get(0).getName());
         assertEquals("Matthew",testList.get(1).getName());
         assertEquals("Eric",testList.get(2).getName());
+        assertEquals("Daisy",testList.get(3).getName());
+        
+        assertEquals("Quak!",testList.get(3).getSound());
     }
 }

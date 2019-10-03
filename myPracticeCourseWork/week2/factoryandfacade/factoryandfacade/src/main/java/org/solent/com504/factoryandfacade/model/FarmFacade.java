@@ -11,4 +11,6 @@ public interface FarmFacade {
     public void addCat(String name);
 
     public void addCow(String name);
+    
+    public void addDuck(String name);
 }
