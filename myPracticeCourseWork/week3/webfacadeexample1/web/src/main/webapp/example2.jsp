@@ -22,12 +22,13 @@
 
                 List<String> supportedAnimalTypes = farmobjectFactory.getSupportedAnimalTypes();
                 session.setAttribute("supportedAnimalTypes", supportedAnimalTypes);
+                
             }
         }
     }
 
     List<String> supportedAnimalTypes = (List<String>) session.getAttribute("supportedAnimalTypes");
-
+    
 %>
 
 <html>
@@ -41,7 +42,9 @@
         <table>
             <% for (String animalType : supportedAnimalTypes) {%>
             <tr>
-                <td><%=animalType%></td>
+                <form>
+                    <button type="button" value="<%=animalType%>">Create <%=animalType%></button><input type="text"></input> 
+                </form>
             </tr>
             <%
                 }
@@ -50,11 +53,19 @@
 
         <p>Animals on Farm</p>
         <table>
+            <% for (Animal farmAnimal : animalsOnFarm) {%>
             <tr>
                 <th>Type</th>
+                <td><%=farmAnimal.getAnimalType()%></td>
                 <th>Name</th>
+                <td><%=farmAnimal.getName()%>></td>
                 <th>Sound</th>
+                <td><%farmAnimal.getSound();%></td>
             </tr>
+            <%
+                }
+            %>
+            
             <% for (Animal animal : farmFacade.getAllAnimals()) {%>
             <tr>
                 <td><%=animal.getAnimalType()%></td>
