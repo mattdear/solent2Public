@@ -5,7 +5,7 @@ import java.util.List;
 import org.solent.com504.factoryandfacade.model.dao.AnimalDao;
 import org.solent.com504.factoryandfacade.model.dao.AnimalTypeDao;
 import org.solent.com504.factoryandfacade.model.dto.Animal;
-import org.solent.com504.factoryandfacade.model.dto.AnimalList;
+import org.solent.com504.factoryandfacade.model.dto.AnimalType;
 import org.solent.com504.factoryandfacade.model.service.FarmFacade;
 
 public class FarmFacadeImpl implements FarmFacade {
@@ -22,6 +22,8 @@ public class FarmFacadeImpl implements FarmFacade {
     public void setAnimalTypeDao(AnimalTypeDao animalTypeDao) {
         this.animalTypeDao = animalTypeDao;
     }
+    
+    FarmFacadeImpl farmFacade = new FarmFacadeImpl();
     
     // Farm facade methods
     @Override
@@ -46,17 +48,35 @@ public class FarmFacadeImpl implements FarmFacade {
     public Animal getAnimal(String name) {
         Animal tempAnimal = animalDao.create(null);
         tempAnimal.setName(name);
-        return animalDao.retrieve(tempAnimal).get(0);
+        List<Animal> tempAnimals = animalDao.retrieve(tempAnimal);
+        if(tempAnimals.isEmpty()){
+            return null;
+        }
+        Animal finalAnimal = tempAnimals.get(0);
+        return animalDao.retrieve(finalAnimal.getId());
     }
 
     @Override
     public boolean removeAnimal(String name) {
-        animalDao.delete(tempAnimal.getId());
-            return true;
+        Animal animalTemplate = animalDao.create(null);
+        animalTemplate.setName(name);
+        List<Animal> tempAnimals = animalDao.retrieve(animalTemplate);
+        if(tempAnimals.isEmpty()){
+        return false;
+        }
+        for(Animal animal : tempAnimals){
+            animalDao.delete(animal.getId());
+        }
+        return true;
     }
 
     @Override
     public List<String> getSupportedAnimalTypes() {
-        animalTypeDao.getSupportedAnimalTypes();
+        List<String> supportedTypes = new ArrayList<>();
+        
+        for(AnimalType animalType : animalTypeDao.getSupportedAnimalTypes()){
+            supportedTypes.add(animalType.getType());
+        }
+        return supportedTypes;
     }
 }
