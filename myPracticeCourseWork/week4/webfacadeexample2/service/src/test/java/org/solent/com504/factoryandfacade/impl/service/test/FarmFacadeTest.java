@@ -82,4 +82,49 @@ public class FarmFacadeTest {
         assertTrue(farmFacade.removeAnimal("Matt"));
         assertTrue(farmFacade.removeAnimal("Josh"));
     }
+    
+    @Test
+    public void getAllAnimalTypes(){
+        FarmFacade farmFacade = serviceObjectFactory.getFarmFacade();
+        
+        List<String> tempList = farmFacade.getSupportedAnimalTypes();
+        assertEquals(tempList.get(0) , "Dog");
+        assertEquals(tempList.get(1) , "Cat");
+        assertEquals(tempList.get(2) , "Cow");
+    }
+    
+    @Test
+    public void getAnimalAndGetOfType(){
+        FarmFacade farmFacade = serviceObjectFactory.getFarmFacade();
+        Animal tempAnimal1 = farmFacade.addAnimal("Dog", "James");
+        Animal tempAnimal2 = farmFacade.addAnimal("Cat", "Matt");
+        Animal tempAnimal3 = farmFacade.addAnimal("Cow", "Josh");
+        Animal tempAnimal4 = farmFacade.addAnimal("Dog", "Honour");
+        Animal tempAnimal5 = farmFacade.addAnimal("Cat", "Amy");
+        Animal tempAnimal6 = farmFacade.addAnimal("Cow", "Sally");
+        
+        Animal tempAnimalr1 = farmFacade.getAnimal("Amy");
+        assertEquals(tempAnimalr1.getName(), "Amy");
+        
+        Animal tempAnimalr2 = farmFacade.getAnimal("Matt");
+        assertEquals(tempAnimalr2.getName(), "Matt");
+        
+        Animal tempAnimalr3 = farmFacade.getAnimal("Honour");
+        assertEquals(tempAnimalr3.getName(), "Honour");
+        
+        List<Animal> returnList1 = farmFacade.getAnimalsOfType("Dog");
+        List<Animal> returnList2 = farmFacade.getAnimalsOfType("Cat");
+        List<Animal> returnList3 = farmFacade.getAnimalsOfType("Cow");
+        
+        assertEquals(returnList1.get(0).getName(), "James");
+        assertEquals(returnList1.get(1).getName(), "Honour");
+        
+        assertEquals(returnList2.get(0).getName(), "Matt");
+        assertEquals(returnList2.get(1).getName(), "Amy");
+        
+        assertEquals(returnList3.get(0).getName(), "Josh");
+        assertEquals(returnList3.get(1).getName(), "Sally");
+        
+    }
+    
 }
