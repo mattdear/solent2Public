@@ -23,8 +23,6 @@ public class FarmFacadeImpl implements FarmFacade {
         this.animalTypeDao = animalTypeDao;
     }
     
-    FarmFacadeImpl farmFacade = new FarmFacadeImpl();
-    
     // Farm facade methods
     @Override
     public List<Animal> getAllAnimals() {
