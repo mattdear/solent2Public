@@ -149,9 +149,15 @@ public class RestService {
 
             FarmFacade serviceFacade = WebObjectFactory.getServiceFacade();
             ReplyMessage replyMessage = new ReplyMessage();
-
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+           
+            AnimalList al = new AnimalList;
+            al.setAnimals(serviceFacade.getAnimalsOfType(animalType));
+            
+            replyMessage.setAnimalList(al);
+            
+            replyMessage.setCode(Response.Status.OK.getStatusCode());
+            
+            return Response.status(Response.Status.OK).entity(replyMessage).build();
 
             //replyMessage.setCode(Response.Status.OK.getStatusCode());
             //return Response.status(Response.Status.OK).entity(replyMessage).build();
