@@ -62,17 +62,47 @@ public class RestClientFarmFacadeTest {
 
     @Test
     public void testGetAnimalsOfType() {
-        fail("test not written");
+        LOG.debug("testGetAnimalsOfType()");
+        String animalType = "Cat";
+        String name = "Josh";
+        farmFacade.addAnimal(animalType, name);
+        String animalType2 = "Cat";
+        String name2 = "Special K";
+        farmFacade.addAnimal(animalType2, name2);
+        String msg = "returned :";
+        List<Animal> animals = farmFacade.getAnimalsOfType("Cat");
+        for (Animal value : animals) {
+            msg = msg + value + ",";
+        }
+        LOG.debug(msg);
+        LOG.debug("end of testGetAnimalsOfType()");
     }
 
     @Test
     public void testGetAnimal() {
-        fail("test not written");
+        LOG.debug("testGetAnimal()");
+        String animalType = "Cat";
+        String name = "Josh";
+        farmFacade.addAnimal(animalType, name);
+        Animal animal = farmFacade.getAnimal(name);
+        String msg = "returned :" + animal;
+        LOG.debug(msg);
+        LOG.debug("end of testGetAnimal()");
     }
 
     @Test
     public void testRemoveAnimal() {
-        fail("test not written");
+        LOG.debug("testRemoveAnimal()");
+        String animalType = "Cat";
+        String name = "Josh";
+        farmFacade.addAnimal(animalType, name);
+        String msg = null;
+        if(farmFacade.removeAnimal(name)){
+            msg = "returned : True";
+        }
+        msg = "returned : False";
+        LOG.debug(msg);
+        LOG.debug("end of testRemoveAnimal()");
     }
 
     @Test
