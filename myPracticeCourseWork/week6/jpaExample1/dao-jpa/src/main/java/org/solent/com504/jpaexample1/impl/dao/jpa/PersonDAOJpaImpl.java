@@ -52,12 +52,18 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public void deleteById(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Person WHERE id = ?1").setParameter(1, id).executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public Person delete(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Long tempid = person.getId();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Person WHERE id = ?1").setParameter(1, tempid).executeUpdate();
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
@@ -69,12 +75,19 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public List<Person> findByRole(Role role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.role = ?1", Person.class);
+        q.setParameter(1, role);
+        List<Person> personList = q.getResultList();
+        return personList;
     }
 
     @Override
     public List<Person> findByName(String firstName, String secondName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.firstName = ?1 AND p.secondName = ?2", Person.class);
+        q.setParameter(1, firstName);
+        q.setParameter(2, secondName);
+        List<Person> personList = q.getResultList();
+        return personList;
     }
 
 }

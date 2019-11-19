@@ -7,6 +7,7 @@ package org.solent.com504.jpaexample1.impl.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.solent.com504.jpaexample1.model.dao.AppointmentDAO;
@@ -35,42 +36,76 @@ public class AppointmentDAOJpaImpl implements AppointmentDAO {
 
     @Override
     public Appointment save(Appointment appointment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        entityManager.persist(appointment);
+        entityManager.getTransaction().commit();
+        return appointment;
     }
 
     @Override
     public List<Appointment> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Appointment> q = entityManager.createQuery("SELECT a FROM Person a", Appointment.class);
+        List<Appointment> appointmentList = q.getResultList();
+        return appointmentList;
     }
 
     @Override
     public Appointment delete(Appointment appointment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Long tempid = appointment.getId();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Appointment WHERE id = ?1").setParameter(1, tempid).executeUpdate();
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Appointment WHERE id = ?1").setParameter(1, id).executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Appointment").executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public List<Appointment> findByPersonA(Person personA) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Appointment> q = entityManager.createQuery("SELECT a FROM Appointment a WHERE a.personA = ?1", Appointment.class);
+        q.setParameter(1, personA);
+        List<Appointment> appointmentList = q.getResultList();
+        return appointmentList;
     }
 
     @Override
     public List<Appointment> findByPersonB(Person personB) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Appointment> q = entityManager.createQuery("SELECT a FROM Appointment a WHERE a.personB = ?1", Appointment.class);
+        q.setParameter(1, personB);
+        List<Appointment> appointmentList = q.getResultList();
+        return appointmentList;
     }
 
     @Override
     public List<Appointment> findByDate(Integer year, Integer month, Integer hour, Integer minutes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String tempQuery = "SELECT a FROM Appointment a WHERE TRUE=TRUE";
+        if (year != null){
+            tempQuery = tempQuery + "AND a.yr = " + year;
+        }
+        if (month != null){
+            tempQuery = tempQuery + "AND a.mth = " + month;
+        }
+        if (hour != null){
+            tempQuery = tempQuery + "AND a.hr = " + hour;
+        }
+        if (minutes != null){
+            tempQuery = tempQuery + "AND a.durationMinutes = " + minutes;
+        }
+        TypedQuery<Appointment> q = entityManager.createQuery(tempQuery, Appointment.class);
+        List<Appointment> appointmentList = q.getResultList();
+        return appointmentList;
     }
 
 }
