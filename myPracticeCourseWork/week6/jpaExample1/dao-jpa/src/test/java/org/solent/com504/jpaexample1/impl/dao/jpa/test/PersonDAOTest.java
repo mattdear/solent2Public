@@ -110,8 +110,6 @@ public class PersonDAOTest {
             msg = msg + "\n   " + person.toString();
         }
         LOG.debug("findAllTest() retrieved:" + msg);
-
-        LOG.debug("NOT IMPLEMENTED");
         LOG.debug("end of findAllTest()");
     }
 
