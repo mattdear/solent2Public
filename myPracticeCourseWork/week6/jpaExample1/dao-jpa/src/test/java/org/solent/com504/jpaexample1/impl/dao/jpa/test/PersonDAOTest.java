@@ -71,23 +71,24 @@ public class PersonDAOTest {
     @Test
     public void findByIdTest() {
         LOG.debug("start of findByIdTest()");
-        List<Person> listPerson = personDao.findByName("Matthew", "Dear");
-        if (listPerson.isEmpty()){
+        init();
+        List<Person> listPerson = personDao.findByName("firstName_3", "secondName_3");
+        if (listPerson.isEmpty()) {
             LOG.debug("listPerson is empty findByIdTest()");
-        } 
-        if (listPerson.size()!=1) {
+        }
+        if (listPerson.size() != 1) {
             LOG.debug("listPerson is greater than 1 findByIdTest()");
         }
         LOG.debug(listPerson.size());
         Person p = listPerson.get(0);
         Long tempLong = p.getId();
-        assertEquals("Matthew",personDao.findById(tempLong).getFirstName());
+        assertEquals("firstName_3", personDao.findById(tempLong).getFirstName());
         LOG.debug("first name matches findByIdTest()");
-        assertEquals("Dear",personDao.findById(tempLong).getSecondName());
+        assertEquals("secondName_3", personDao.findById(tempLong).getSecondName());
         LOG.debug("second name matches findByIdTest()");
-        assertEquals("54 Brounmouth Place",personDao.findById(tempLong).getAddress());        
+        assertEquals("address_3", personDao.findById(tempLong).getAddress());
         LOG.debug("address matches findByIdTest()");
-        assertEquals(Role.DENTIST,personDao.findById(tempLong).getRole());
+        assertEquals(Role.PATIENT, personDao.findById(tempLong).getRole());
         LOG.debug("role matches findByIdTest()");
         LOG.debug("end of findByIdTest()");
     }
@@ -99,14 +100,14 @@ public class PersonDAOTest {
         init();
         List<Person> personList = personDao.findAll();
         assertNotNull(personList);
-        
+
         // init should insert 5 people
         assertEquals(5, personList.size());
 
         // print out result
         String msg = "";
         for (Person person : personList) {
-            msg = msg +"\n   " +  person.toString();
+            msg = msg + "\n   " + person.toString();
         }
         LOG.debug("findAllTest() retrieved:" + msg);
 
@@ -117,20 +118,21 @@ public class PersonDAOTest {
     @Test
     public void deleteByIdTest() {
         LOG.debug("start of deleteByIdTest()");
-        List<Person> listPerson = personDao.findByName("Matthew", "Dear");
-        if (listPerson.isEmpty()){
+        init();
+        List<Person> listPerson = personDao.findByName("firstName_5", "secondName_5");
+        if (listPerson.isEmpty()) {
             LOG.debug("listPerson is empty deleteByIdTest()");
-        } 
-        if (listPerson.size()!=1) {
+        }
+        if (listPerson.size() != 1) {
             LOG.debug("listPerson is greater than 1 deleteByIdTest()");
         }
         Person p = listPerson.get(0);
         p.setFirstName(null);
         p.setSecondName(null);
         p.setAddress(null);
-        personDao.delete(p);
-        List<Person> listPerson2 = personDao.findByName("Matthew", "Dear");
-        if (listPerson2.size() >0){
+        personDao.deleteById(p.getId());
+        List<Person> listPerson2 = personDao.findByName("firstName_5", "secondName_5");
+        if (listPerson2.size() > 0) {
             LOG.debug("list still contains person deleteByIdTest");
         }
         assertTrue(listPerson2.isEmpty());
@@ -138,35 +140,63 @@ public class PersonDAOTest {
     }
 
     @Test
-    public void deleteTest() {
-        LOG.debug("start of deleteTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
-        LOG.debug("end ofdeleteTest()");
-    }
-
-    @Test
-    public void deleteAllTest() {
-        LOG.debug("start of deleteAllTest())");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
-        LOG.debug("end of deleteAllTest()");
-    }
-
-    @Test
     public void findByRoleTest() {
         LOG.debug("start of findByIdTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        init();
+        List<Person> tempList = personDao.findByRole(Role.PATIENT);
+        for (int i = 1; i < 6; i++){
+            Person p = tempList.get(i-1);
+            assertEquals("firstName_"+i, p.getFirstName());
+            assertEquals("secondName_"+i, p.getSecondName());
+            assertEquals("address_"+i, p.getAddress());
+        }
         LOG.debug("end of findByIdTest()");
     }
 
     @Test
     public void findByNameTest() {
         LOG.debug("start of findByNameTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        init();
+        List<Person> tempList = personDao.findByName("firstName_4", "secondName_4");
+        if (tempList.isEmpty()) {
+            LOG.debug("list is empty findByNameTest()");
+        }
+        if (tempList.size() > 1) {
+            LOG.debug("list is to long findByNameTest()");
+        }
+        Person p = tempList.get(0);
+        assertEquals("firstName_4", p.getFirstName());
+        assertEquals("secondName_4", p.getSecondName());
+        assertEquals("address_4", p.getAddress());
         LOG.debug("end of findByNameTest())");
 
+    }
+
+    @Test
+    public void deleteTest() {
+        LOG.debug("start of deleteTest()");
+        init();
+        List<Person> tempList = personDao.findByName("firstName_2", "secondName_2");
+         if (tempList.isEmpty()) {
+            LOG.debug("list is empty findByNameTest()");
+        }
+        if (tempList.size() > 1) {
+            LOG.debug("list is to long findByNameTest()");
+        }
+        Person p = tempList.get(0);
+        personDao.delete(p);
+        List<Person> tempList2 = personDao.findByName("firstName_2", "secondName_2");
+        assertTrue(tempList2.isEmpty());
+        LOG.debug("end ofdeleteTest()");
+    }
+
+    @Test
+    public void deleteAllTest() {
+        LOG.debug("start of deleteAllTest())");
+        init();
+        personDao.deleteAll();
+        List<Person> tempList = personDao.findByRole(Role.PATIENT);
+        assertTrue(tempList.isEmpty());
+        LOG.debug("end of deleteAllTest()");
     }
 }
