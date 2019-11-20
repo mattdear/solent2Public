@@ -48,7 +48,7 @@ public class PersonDAOTest {
             personDao.save(p);
         }
     }
-
+    
     @Test
     public void createPersonDAOTest() {
         LOG.debug("start of createPersonDAOTest");
@@ -57,19 +57,39 @@ public class PersonDAOTest {
     }
 
     @Test
-    public void findByIdTest() {
-        LOG.debug("start of findByIdTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
-        LOG.debug("end of findByIdTest()");
+    public void saveTest() {
+        LOG.debug("start of saveTest()");
+        Person p1 = new Person();
+        p1.setFirstName("Matthew");
+        p1.setSecondName("Dear");
+        p1.setAddress("54 Brounmouth Place");
+        p1.setRole(Role.DENTIST);
+        personDao.save(p1);
+        LOG.debug("end of saveTest()");
     }
 
     @Test
-    public void saveTest() {
-        LOG.debug("start of saveTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
-        LOG.debug("end of saveTest()");
+    public void findByIdTest() {
+        LOG.debug("start of findByIdTest()");
+        List<Person> listPerson = personDao.findByName("Matthew", "Dear");
+        if (listPerson.isEmpty()){
+            LOG.debug("listPerson is empty findByIdTest()");
+        } 
+        if (listPerson.size()!=1) {
+            LOG.debug("listPerson is greater than 1 findByIdTest()");
+        }
+        LOG.debug(listPerson.size());
+        Person p = listPerson.get(0);
+        Long tempLong = p.getId();
+        assertEquals("Matthew",personDao.findById(tempLong).getFirstName());
+        LOG.debug("first name matches findByIdTest()");
+        assertEquals("Dear",personDao.findById(tempLong).getSecondName());
+        LOG.debug("second name matches findByIdTest()");
+        assertEquals("54 Brounmouth Place",personDao.findById(tempLong).getAddress());        
+        LOG.debug("address matches findByIdTest()");
+        assertEquals(Role.DENTIST,personDao.findById(tempLong).getRole());
+        LOG.debug("role matches findByIdTest()");
+        LOG.debug("end of findByIdTest()");
     }
 
     @Test
@@ -97,8 +117,23 @@ public class PersonDAOTest {
     @Test
     public void deleteByIdTest() {
         LOG.debug("start of deleteByIdTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        List<Person> listPerson = personDao.findByName("Matthew", "Dear");
+        if (listPerson.isEmpty()){
+            LOG.debug("listPerson is empty deleteByIdTest()");
+        } 
+        if (listPerson.size()!=1) {
+            LOG.debug("listPerson is greater than 1 deleteByIdTest()");
+        }
+        Person p = listPerson.get(0);
+        p.setFirstName(null);
+        p.setSecondName(null);
+        p.setAddress(null);
+        personDao.delete(p);
+        List<Person> listPerson2 = personDao.findByName("Matthew", "Dear");
+        if (listPerson2.size() >0){
+            LOG.debug("list still contains person deleteByIdTest");
+        }
+        assertTrue(listPerson2.isEmpty());
         LOG.debug("end of deleteByIdTest()");
     }
 
