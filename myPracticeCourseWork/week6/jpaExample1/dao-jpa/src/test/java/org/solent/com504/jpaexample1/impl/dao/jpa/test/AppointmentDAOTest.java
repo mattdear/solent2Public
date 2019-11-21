@@ -244,6 +244,10 @@ public class AppointmentDAOTest {
     public void DeleteAllTest() {
         LOG.debug("start of DeleteAllTest()");
         init();
+        appointmentDao.deleteAll();
+        List<Appointment> tempList = appointmentDao.findAll();
+        LOG.debug(tempList.size());
+        assertTrue(tempList.isEmpty());
         LOG.debug("end of DeleteAllTest()");
     }
 
@@ -251,6 +255,45 @@ public class AppointmentDAOTest {
     public void findByPersonATest() {
         LOG.debug("start of findByPersonATest()");
         init();
+        List<Person> personAList = personDao.findByName("firstName_1", "secondName_1");
+        if (personAList.isEmpty()) {
+            LOG.debug("personA list is empty findByIdTest");
+        }
+        if (personAList.size()>1) {
+            LOG.debug("personA list is to big findByIdTest");
+        }
+        Person personA = personAList.get(0);
+        
+        List<Person> personBList = personDao.findByName("firstName_1", "secondName_1");
+        if (personBList.isEmpty()) {
+            LOG.debug("personB list is empty findByIdTest");
+        }
+        if (personBList.size()>1) {
+            LOG.debug("personB list is to big findByIdTest");
+        }
+        Person personB = personBList.get(0);
+        
+        List<Appointment> appointmentList = appointmentDao.findByDate(1,1,1,1);
+        if (appointmentList.isEmpty()) {
+            LOG.debug("appointment list is empty findByIdTest");
+        }
+        if (appointmentList.size()>1) {
+            LOG.debug("appointment list is to big findByIdTest");
+        }
+        Appointment a = appointmentList.get(0);
+        Person tempPersonA = a.getPersonA();
+        
+        List<Appointment> testAppointment = appointmentDao.findByPersonA(tempPersonA);
+        assertFalse(testAppointment.isEmpty());
+        assertEquals(1,testAppointment.size());
+        Appointment b = testAppointment.get(0);
+        assertEquals("appointment_1",b.getDescripton());
+        assertEquals(personA,b.getPersonA());
+        assertEquals(personB,b.getPersonB());
+        assertEquals(a.getHr(),b.getHr());
+        assertEquals(a.getMth(),b.getMth());
+        assertEquals(a.getYr(),b.getYr());
+        assertEquals(a.getDurationMinutes(),b.getDurationMinutes());
         LOG.debug("end of findByPersonATest()");
     }
 
@@ -258,6 +301,45 @@ public class AppointmentDAOTest {
     public void findByPersonBTest() {
         LOG.debug("start of findByPersonBTest()");
         init();
+        List<Person> personAList = personDao.findByName("firstName_1", "secondName_1");
+        if (personAList.isEmpty()) {
+            LOG.debug("personA list is empty findByIdTest");
+        }
+        if (personAList.size()>1) {
+            LOG.debug("personA list is to big findByIdTest");
+        }
+        Person personA = personAList.get(0);
+        
+        List<Person> personBList = personDao.findByName("firstName_1", "secondName_1");
+        if (personBList.isEmpty()) {
+            LOG.debug("personB list is empty findByIdTest");
+        }
+        if (personBList.size()>1) {
+            LOG.debug("personB list is to big findByIdTest");
+        }
+        Person personB = personBList.get(0);
+        
+        List<Appointment> appointmentList = appointmentDao.findByDate(1,1,1,1);
+        if (appointmentList.isEmpty()) {
+            LOG.debug("appointment list is empty findByIdTest");
+        }
+        if (appointmentList.size()>1) {
+            LOG.debug("appointment list is to big findByIdTest");
+        }
+        Appointment a = appointmentList.get(0);
+        Person tempPersonB = a.getPersonB();
+        
+        List<Appointment> testAppointment = appointmentDao.findByPersonB(tempPersonB);
+        assertFalse(testAppointment.isEmpty());
+        assertEquals(1,testAppointment.size());
+        Appointment b = testAppointment.get(0);
+        assertEquals("appointment_1",b.getDescripton());
+        assertEquals(personA,b.getPersonA());
+        assertEquals(personB,b.getPersonB());
+        assertEquals(a.getHr(),b.getHr());
+        assertEquals(a.getMth(),b.getMth());
+        assertEquals(a.getYr(),b.getYr());
+        assertEquals(a.getDurationMinutes(),b.getDurationMinutes());
         LOG.debug("end of findByPersonBTest()");
     }
 
@@ -265,6 +347,44 @@ public class AppointmentDAOTest {
     public void findByDateTest() {
         LOG.debug("start of findByDateTest()");
         init();
+        List<Person> personAList = personDao.findByName("firstName_1", "secondName_1");
+        if (personAList.isEmpty()) {
+            LOG.debug("personA list is empty findByIdTest");
+        }
+        if (personAList.size()>1) {
+            LOG.debug("personA list is to big findByIdTest");
+        }
+        Person personA = personAList.get(0);
+        
+        List<Person> personBList = personDao.findByName("firstName_1", "secondName_1");
+        if (personBList.isEmpty()) {
+            LOG.debug("personB list is empty findByIdTest");
+        }
+        if (personBList.size()>1) {
+            LOG.debug("personB list is to big findByIdTest");
+        }
+        Person personB = personBList.get(0);
+        
+        List<Appointment> appointmentList = appointmentDao.findByDate(1,1,1,1);
+        if (appointmentList.isEmpty()) {
+            LOG.debug("appointment list is empty findByIdTest");
+        }
+        if (appointmentList.size()>1) {
+            LOG.debug("appointment list is to big findByIdTest");
+        }
+        Appointment a = appointmentList.get(0);
+        
+        List<Appointment> testAppointment = appointmentDao.findByDate(1,1,1,1);
+        assertFalse(testAppointment.isEmpty());
+        assertEquals(1,testAppointment.size());
+        Appointment b = testAppointment.get(0);
+        assertEquals("appointment_1",b.getDescripton());
+        assertEquals(personA,b.getPersonA());
+        assertEquals(personB,b.getPersonB());
+        assertEquals(a.getHr(),b.getHr());
+        assertEquals(a.getMth(),b.getMth());
+        assertEquals(a.getYr(),b.getYr());
+        assertEquals(a.getDurationMinutes(),b.getDurationMinutes());
         LOG.debug("end of findByDateTest()");
     }
 
