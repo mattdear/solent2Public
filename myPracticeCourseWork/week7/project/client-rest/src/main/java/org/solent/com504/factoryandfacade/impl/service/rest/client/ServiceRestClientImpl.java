@@ -56,5 +56,24 @@ public class ServiceRestClientImpl implements ServiceFacade {
 
     }
 
+    @Override
+    public boolean arrived(String user, String location) {
+             LOG.debug("getHeartbeat() Called");
+
+        Client client = ClientBuilder.newClient(new ClientConfig().register(LoggingFilter.class));
+        WebTarget webTarget = client.target(baseUrl).path("arrived").queryParam("name", user)
+                .queryParam("location", location);
+
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
+        Response response = invocationBuilder.get();
+
+        ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
+        LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
+        
+        if (response.getStatus()!=200) return false;
+        return true;
+
+    }
+
 
 }

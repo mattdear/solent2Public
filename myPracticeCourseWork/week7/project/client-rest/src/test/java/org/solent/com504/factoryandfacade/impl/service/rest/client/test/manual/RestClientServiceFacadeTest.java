@@ -46,5 +46,17 @@ public class RestClientServiceFacadeTest {
 
         LOG.debug("end of testGetHeartbeat()");
     }
+    
+        @Test
+    public void testArrived() {
+        LOG.debug("start of testArrived()");
+
+        boolean ok = serviceFacade.arrived("fred", "home");
+          LOG.debug("ok response :" + ok);
+        //assertTrue(ok);
+      
+
+        LOG.debug("end of testArrived()");
+    }
 
 }

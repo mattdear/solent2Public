@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.solent.com504.project.model.dao.AppointmentDAO;
 import org.solent.com504.project.model.dao.PersonDAO;
 import org.solent.com504.project.model.service.ServiceFacade;
 
 public class ServiceFacadeImpl implements ServiceFacade {
 
+    final static Logger LOG = LogManager.getLogger(ServiceFacadeImpl.class);
+
     private PersonDAO personDao = null;
 
     private AppointmentDAO appointmentDao = null;
-    
-       // used to concurently count heartbeat requests
+
+    // used to concurently count heartbeat requests
     private static AtomicInteger heartbeatRequests = new AtomicInteger();
 
     // setters for DAOs
@@ -27,10 +31,15 @@ public class ServiceFacadeImpl implements ServiceFacade {
     }
 
     // Service facade methods
-
     @Override
     public String getHeartbeat() {
-        return "heartbeat number "+heartbeatRequests.getAndIncrement()+ " "+ new Date().toString();
+        return "heartbeat number " + heartbeatRequests.getAndIncrement() + " " + new Date().toString();
     }
-    
+
+    @Override
+    public boolean arrived(String user, String location) {
+        LOG.debug("arrived called user" + user + " location=" + location);
+        return false;
+    }
+
 }
