@@ -1,0 +1,227 @@
+{
+    "info": {
+        "name": "RESTer",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Store",
+            "item": [
+                {
+                    "request": {
+                        "url": "http://localhost:8084/rest/example/retrieve?id=1",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/xml"
+                            }
+                        ]
+                    },
+                    "id": "rester-10",
+                    "name": "Retrieve"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8084/rest/example/retrievematching",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/xml"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/xml"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<item>\n <sku>abcd</sku>\n</item>"
+                        }
+                    },
+                    "id": "rester-11",
+                    "name": "RetrieveMatchine",
+                    "response": [
+                        {
+                            "id": "rester-37",
+                            "name": "2019-11-04T15:18:39.650Z RetrieveMatchine",
+                            "originalRequest": {
+                                "url": "http://localhost:8084/rest/example/retrievematching",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/xml"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/xml"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "<item>\n <sku>abcd</sku>\n</item>"
+                                }
+                            },
+                            "responseTime": 80,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "Apache-Coyote/1.1"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/xml"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "248"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Mon, 04 Nov 2019 15:18:39 GMT"
+                                }
+                            ],
+                            "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><replyMessage><code>200</code><itemList><items><item><id>12</id><sku>abcd</sku><description>xcvxcv</description><price>0.0</price><quantity>0</quantity></item></items></itemList></replyMessage>",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-36",
+                            "name": "2019-11-04T15:17:45.415Z RetrieveMatchine",
+                            "originalRequest": {
+                                "url": "http://localhost:8084/rest/example/retrievematching",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/xml"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/xml"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "<item>\n <description>abcd</description>\n</item>"
+                                }
+                            },
+                            "responseTime": 108,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "Apache-Coyote/1.1"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/xml"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "129"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Mon, 04 Nov 2019 15:17:45 GMT"
+                                }
+                            ],
+                            "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><replyMessage><code>200</code><itemList><items/></itemList></replyMessage>",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-35",
+                            "name": "2019-11-04T15:16:35.525Z RetrieveMatchine",
+                            "originalRequest": {
+                                "url": "http://localhost:8084/rest/example/retrievematching",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/xml"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/xml"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "<item>\n <description>description_0</description>\n</item>"
+                                }
+                            },
+                            "responseTime": 47,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "Apache-Coyote/1.1"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/xml"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "129"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Mon, 04 Nov 2019 15:16:35 GMT"
+                                }
+                            ],
+                            "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><replyMessage><code>200</code><itemList><items/></itemList></replyMessage>",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-34",
+                            "name": "2019-11-04T15:16:07.322Z RetrieveMatchine",
+                            "originalRequest": {
+                                "url": "http://localhost:8084/rest/example/retrievematching",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/xml"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "<item>\n <description>description_0</description>\n</item>"
+                                }
+                            },
+                            "responseTime": 155,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "Apache-Coyote/1.1"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/html;charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Language",
+                                    "value": "en"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "1135"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Mon, 04 Nov 2019 15:16:07 GMT"
+                                }
+                            ],
+                            "body": "<!DOCTYPE html><html><head><title>Apache Tomcat/8.0.27 - Error report</title><style type=\"text/css\">H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}.line {height: 1px; background-color: #525D76; border: none;}</style> </head><body><h1>HTTP Status 415 - Unsupported Media Type</h1><div class=\"line\"></div><p><b>type</b> Status report</p><p><b>message</b> <u>Unsupported Media Type</u></p><p><b>description</b> <u>The server refused this request because the request entity is in a format not supported by the requested resource for the requested method.</u></p><hr class=\"line\"><h3>Apache Tomcat/8.0.27</h3></body></html>",
+                            "status": "Unsupported Media Type",
+                            "code": 415
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ReplyMessage">
+  <ClassDiagramComponents>
+    <Class name="Item" package="org.solent.com504.tca2019.model" visibility="public" xPosition="632.0" yPosition="999.0">
+      <Fields>
+        <Field name="sku" type="String" visibility="private"/>
+        <Field name="description" type="String" visibility="private"/>
+        <Field name="price" type="Double" visibility="private"/>
+        <Field name="quantity" type="Integer" visibility="private"/>
+        <Field name="id" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ReplyMessage" package="org.solent.com504.tca2019.model" visibility="public" xPosition="22.0" yPosition="208.0">
+      <Fields>
+        <Field name="code" type="Integer" visibility="private"/>
+        <Field name="debugMessage" type="String" visibility="private"/>
+        <Field name="itemList" type="ItemList" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ItemList" package="org.solent.com504.tca2019.model" visibility="public" xPosition="22.0" yPosition="436.0">
+      <Fields>
+        <Field name="items" type="List&lt;Item&gt;" visibility="private"/>
+        <Field name="lastItemId" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="ServiceFacade" package="org.solent.com504.tca2019.model" visibility="public" xPosition="602.0" yPosition="552.0">
+      <Methods/>
+    </Interface>
+    <Interface name="ItemDAO" package="org.solent.com504.tca2019.model" visibility="public" xPosition="556.0" yPosition="711.0">
+      <Methods>
+        <Method name="createItem" returnType="Item" visibility="public">
+          <Argument type="Item" name="item"/>
+        </Method>
+        <Method name="deleteItem" returnType="Integer" visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Method>
+        <Method name="retrieveItem" returnType="Integer" visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Method>
+        <Method name="retrieveAllItems" returnType="List&lt;Item&gt;" visibility="public"/>
+        <Method name="retrieveMatchingItems" returnType="Item" visibility="public">
+          <Argument type="Item" name="itemTemplate"/>
+        </Method>
+        <Method name="updateItem" returnType="Item" visibility="public">
+          <Argument type="Item" name="item"/>
+        </Method>
+        <Method name="deleteAllItems" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RestInterface" package="org.solent.com504.tca2019.model" visibility="public" xPosition="166.0" yPosition="0.0">
+      <Methods>
+        <Method name="retrieveMatchingItems" returnType="Item" visibility="public">
+          <Argument type="Item" name="itemTempate"/>
+        </Method>
+        <Method name="retrieveItem" returnType="Integer" visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="ServiceFactory" package="org.solent.com504.tca2019.model" visibility="public" xPosition="579.0" yPosition="173.0">
+      <Methods>
+        <Method name="getServiceFacade" returnType="ServiceFacade" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="WebUiJsp_do_not_generate" package="org.solent.com504.tca2019.model" visibility="public" xPosition="881.0" yPosition="19.0">
+      <Methods/>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="usesEntityDao" source="org.solent.com504.tca2019.model.ServiceFacade" target="org.solent.com504.tca2019.model.ItemDAO" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="org.solent.com504.tca2019.model.ServiceFacade" target="org.solent.com504.tca2019.model.ItemDAO"/>
+    <HasRelation name="hasEntityList" source="org.solent.com504.tca2019.model.ReplyMessage" target="org.solent.com504.tca2019.model.ItemList" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="usesObjectFactoryToGetService" source="org.solent.com504.tca2019.model.RestInterface" target="org.solent.com504.tca2019.model.ServiceFactory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="usesObjectFactoryToGetService" source="org.solent.com504.tca2019.model.WebUiJsp_do_not_generate" target="org.solent.com504.tca2019.model.ServiceFactory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="usesServiceFacade" source="org.solent.com504.tca2019.model.WebUiJsp_do_not_generate" target="org.solent.com504.tca2019.model.ServiceFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="createsAndAccesses" source="org.solent.com504.tca2019.model.ServiceFactory" target="org.solent.com504.tca2019.model.ServiceFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="usesEntities" source="org.solent.com504.tca2019.model.ItemDAO" target="org.solent.com504.tca2019.model.Item" sourceCardinality="1..1" targetCardinality="0..*"/>
+    <UseRelation name="usesServiceFacade" source="org.solent.com504.tca2019.model.RestInterface" target="org.solent.com504.tca2019.model.ServiceFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="useReplyMessage" source="org.solent.com504.tca2019.model.RestInterface" target="org.solent.com504.tca2019.model.ReplyMessage" sourceCardinality="1..1" targetCardinality="0..*"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
